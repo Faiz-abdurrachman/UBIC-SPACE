@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
+import ubicLogo from "../assets/ubic.png";
 
 const navItems = [
   { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
+  { label: 'Problem', href: '#problem' },
+  { label: 'Vision', href: '#vision' },
   { label: 'Programs', href: '#programs' },
-  { label: 'Events', href: '#events' },
   { label: 'Partners', href: '#partners' },
-  { label: 'Join', href: '#join' },
 ];
 
 export default function Navbar() {
@@ -19,9 +20,8 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
       
-      // Update active section based on scroll position - more precise
       const sections = navItems.map(item => item.href.substring(1));
-      const scrollPosition = window.scrollY + 120; // Offset for navbar
+      const scrollPosition = window.scrollY + 100;
       
       let current = 'home';
       sections.forEach(section => {
@@ -40,7 +40,7 @@ export default function Navbar() {
       setActiveSection(current);
     };
 
-    handleScroll(); // Check on mount
+    handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -49,28 +49,27 @@ export default function Navbar() {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      // Calculate precise offset accounting for fixed navbar (80px height)
       const navbarHeight = 80;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - navbarHeight;
 
-      // Smooth scroll to exact position
       window.scrollTo({
         top: Math.max(0, offsetPosition),
         behavior: 'smooth',
       });
     }
+    setMobileMenuOpen(false);
   };
 
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 border-b-2 border-tech-black transition-all duration-300 ${
         scrolled
-          ? 'bg-surface/80 backdrop-blur-md border-b border-white/5'
-          : 'bg-transparent'
+          ? 'bg-background shadow-brutal'
+          : 'bg-background'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -79,20 +78,37 @@ export default function Navbar() {
           <motion.a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center space-x-2"
-            whileHover={{ opacity: 0.8 }}
+            className="flex items-center space-x-3"
+            whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <span className="text-xl font-heading font-bold tracking-tight text-text-primary">
-              UBIC
-            </span>
-            <span className="text-xs font-mono text-text-secondary font-normal">
-              /university
-            </span>
+            {/* Logo Image Area */}
+            <div className="w-10 h-10 rounded-lg border-2 border-tech-black bg-background flex items-center justify-center overflow-hidden flex-shrink-0">
+              <img 
+                src={ubicLogo}
+                alt="UBIC Logo" 
+                className="w-full h-full object-contain p-1"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+              <div className="hidden w-full h-full items-center justify-center text-xs font-heading font-bold text-primary-green">
+                {/* U */}
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xl font-heading font-bold tracking-tight text-tech-black leading-tight">
+                {/* UBIC */}
+              </span>
+              <span className="text-xs font-mono text-tech-black/60 font-normal leading-tight">
+                {/* /university */}
+              </span>
+            </div>
           </motion.a>
 
           {/* Navigation Items */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1);
               return (
@@ -100,23 +116,15 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`relative px-4 py-2 text-sm font-body transition-colors duration-200 ${
+                  className={`relative px-4 py-2 text-sm font-mono font-medium transition-colors duration-200 ${
                     isActive
-                      ? 'text-text-primary'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'text-tech-black bg-primary-green/10'
+                      : 'text-tech-black/70 hover:text-tech-black hover:bg-grid-lines/50'
                   }`}
                   whileHover={{ y: -2 }}
                   transition={{ duration: 0.2 }}
                 >
                   {item.label}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-ubic-blue"
-                      initial={false}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.a>
               );
             })}
@@ -125,37 +133,13 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-text-secondary hover:text-text-primary transition-colors"
+            className="md:hidden p-2 border-2 border-tech-black rounded-lg bg-background hover:bg-grid-lines/50 transition-colors"
             aria-label="Menu"
           >
             {mobileMenuOpen ? (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              <X className="w-5 h-5 text-tech-black" strokeWidth={2} />
             ) : (
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <Menu className="w-5 h-5 text-tech-black" strokeWidth={2} />
             )}
           </button>
         </div>
@@ -167,23 +151,20 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-white/5 py-4"
+            className="md:hidden border-t-2 border-tech-black py-4 bg-background"
           >
-            <div className="flex flex-col space-y-1">
+            <div className="flex flex-col space-y-2">
               {navItems.map((item) => {
                 const isActive = activeSection === item.href.substring(1);
                 return (
                   <a
                     key={item.href}
                     href={item.href}
-                    onClick={(e) => {
-                      handleNavClick(e, item.href);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`px-4 py-2 text-sm font-body transition-colors duration-200 ${
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className={`px-4 py-2 text-sm font-mono transition-colors duration-200 ${
                       isActive
-                        ? 'text-text-primary bg-white/5'
-                        : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
+                        ? 'text-tech-black bg-primary-green/10 border-l-2 border-primary-green'
+                        : 'text-tech-black/70 hover:text-tech-black hover:bg-grid-lines/50'
                     }`}
                   >
                     {item.label}

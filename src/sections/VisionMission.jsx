@@ -1,81 +1,124 @@
 import { motion } from 'framer-motion';
-import { fadeUp } from '../animations/variants';
-import { visionMission } from '../data/content';
+import NeoCard from '../components/NeoCard';
+import SectionHeader from '../components/SectionHeader';
+import AbstractShapes from '../components/AbstractShapes';
+import { BookOpen, Lightbulb, Network, Rocket } from 'lucide-react';
+
+const visionText = "To become a leading hub of innovation in blockchain technology and digital assets, fostering global competitiveness and impactful solutions.";
+
+const missionItems = [
+  {
+    icon: BookOpen,
+    title: 'Enhancing Knowledge',
+    description: 'Workshops and educational programs to build technical expertise'
+  },
+  {
+    icon: Lightbulb,
+    title: 'Fostering Research',
+    description: 'Creating impactful solutions through research and development'
+  },
+  {
+    icon: Network,
+    title: 'Professional Networks',
+    description: 'Connecting students with industry leaders and opportunities'
+  },
+  {
+    icon: Rocket,
+    title: 'Entrepreneurship',
+    description: 'Supporting startup initiatives and innovative projects'
+  }
+];
 
 export default function VisionMission() {
-  const content = visionMission.en;
-
   return (
-    <section className="relative py-40 px-6 lg:px-8 bg-surface/40 section-container">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-20 md:gap-32">
-          {/* Vision */}
+    <section
+      id="vision"
+      className="relative py-20 px-6 lg:px-8 bg-section-alt abstract-shapes"
+    >
+      <div className="absolute inset-0 diagonal-lines opacity-30 z-0 pointer-events-none" />
+      <AbstractShapes />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <SectionHeader
+          title="Vision & Mission"
+          subtitle="Our purpose and commitment to blockchain innovation"
+        />
+
+        <div className="space-y-16">
+          {/* Vision - Manifesto Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className="space-y-6 relative group"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="space-y-4">
-              <motion.div
-                className="inline-block px-3 py-1 text-xs font-mono text-ubic-blue bg-ubic-blue/10 rounded-full border border-ubic-blue/20"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              >
-                VISION
-              </motion.div>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-text-primary tracking-tight">
-                {content.vision.title}
-              </h3>
-              <motion.div
-                className="w-16 h-0.5 bg-ubic-blue/50"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              />
-            </div>
-            <p className="text-lg md:text-xl text-text-secondary font-body leading-relaxed pt-2">
-              {content.vision.content}
-            </p>
+            <motion.div
+              className="neo-card rounded-lg border-2 border-tech-black p-0"
+              style={{ boxShadow: '6px 6px 0px 0px #111827', backgroundColor: '#006A4E' }}
+            >
+              <div className="p-8 md:p-12 space-y-4">
+                <div className="inline-block px-3 py-1 text-xs font-mono bg-white/20 border-2 border-white/30 rounded-lg text-white">
+                  VISION
+                </div>
+                <h3 className="text-3xl md:text-4xl font-heading font-bold tracking-tight text-white">
+                  {visionText}
+                </h3>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Mission */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-            className="space-y-6 relative group"
-          >
-            <div className="space-y-4">
-              <motion.div
-                className="inline-block px-3 py-1 text-xs font-mono text-ubic-blue bg-ubic-blue/10 rounded-full border border-ubic-blue/20"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-              >
+          {/* Mission - 2x2 Grid */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-8"
+            >
+              <div className="inline-block px-3 py-1 text-xs font-mono bg-tech-black text-white border-2 border-tech-black rounded-lg">
                 MISSION
-              </motion.div>
-              <h3 className="text-3xl md:text-4xl font-heading font-bold text-text-primary tracking-tight">
-                {content.mission.title}
-              </h3>
-              <motion.div
-                className="w-16 h-0.5 bg-ubic-blue/50"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              />
+              </div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {missionItems.map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                  >
+                    <NeoCard className="h-full p-6" hoverEffect={true}>
+                      <div className="space-y-4">
+                        <div 
+                          className="p-3 rounded-lg border-2 w-fit"
+                          style={{
+                            backgroundColor: 'rgba(0, 106, 78, 0.1)',
+                            borderColor: '#006A4E'
+                          }}
+                        >
+                          <IconComponent
+                            className="w-6 h-6"
+                            style={{ color: '#006A4E' }}
+                            strokeWidth={2}
+                          />
+                        </div>
+                        <h4 className="text-xl font-heading font-bold text-tech-black">
+                          {item.title}
+                        </h4>
+                        <p className="text-sm font-mono text-tech-black/70 leading-relaxed">
+                          {item.description}
+                        </p>
+                      </div>
+                    </NeoCard>
+                  </motion.div>
+                );
+              })}
             </div>
-            <p className="text-lg md:text-xl text-text-secondary font-body leading-relaxed pt-2">
-              {content.mission.content}
-            </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

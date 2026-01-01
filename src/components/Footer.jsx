@@ -1,36 +1,74 @@
 import { motion } from 'framer-motion';
-import { fadeUp } from '../animations/variants';
-import { footerContent } from '../data/content';
-
+import { ExternalLink } from 'lucide-react';
+import ubicLogo from "../assets/ubic.png";
 export default function Footer() {
-  const content = footerContent.en; // Can be made dynamic
-
   return (
-    <footer className="relative border-t border-white/10 bg-surface/30 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <footer className="relative border-t-2 border-tech-black bg-background">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeUp}
+          transition={{ duration: 0.6 }}
           className="space-y-8"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <span className="text-xl font-heading font-bold tracking-tight text-text-primary">
-                  UBIC
-                </span>
-                <span className="text-xs font-mono text-text-secondary font-normal">
-                  /university
-                </span>
+              <div className="flex items-center space-x-3">
+                {/* Footer Logo */}
+                <div className="w-12 h-12 rounded-lg border-2 border-tech-black bg-background flex items-center justify-center overflow-hidden flex-shrink-0">
+                  <img 
+                    src={ubicLogo} 
+                    alt="UBIC Logo" 
+                    className="w-full h-full object-contain p-1.5"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
+                    }}
+                  />
+                  <div className="hidden w-full h-full items-center justify-center text-sm font-heading font-bold text-primary-green">
+                    {/* U */}
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xl font-heading font-bold tracking-tight text-tech-black leading-tight">
+                    UBIC
+                  </span>
+                  <span className="text-xs font-mono text-tech-black/60 font-normal leading-tight">
+                    {/* /university */}
+                  </span>
+                </div>
               </div>
-              <p className="text-sm text-text-secondary font-body">
-                {content.affiliation}
+              <p className="text-sm font-mono text-tech-black/80">
+                UNU Blockchain Innovation Club
               </p>
             </div>
-            <p className="text-xs text-text-secondary font-mono">
-              {content.legal}
+
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+              <a
+                href="https://s.id/ubicspace"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-mono text-tech-black hover:text-primary-green transition-colors group"
+              >
+                <span>s.id/ubicspace</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+              </a>
+              <a
+                href="https://instagram.com/ubic.unujogja"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm font-mono text-tech-black hover:text-primary-green transition-colors group"
+              >
+                <span>@ubic.unujogja</span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" strokeWidth={2} />
+              </a>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t-2 border-grid-lines">
+            <p className="text-xs font-mono text-tech-black/60 text-center">
+              Copyright 2025 UBIC Dev Team
             </p>
           </div>
         </motion.div>

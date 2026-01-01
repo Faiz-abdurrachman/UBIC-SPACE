@@ -7,16 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#0B0E14',
-        surface: '#111827',
-        'text-primary': '#E5E7EB',
-        'text-secondary': '#9CA3AF',
-        'ubic-blue': '#3B82F6',
+        'primary-green': '#006A4E',
+        'accent-gold': '#F59E0B',
+        'tech-black': '#111827',
+        'background': '#FAFAFA',
+        'grid-lines': '#E5E5E5',
       },
       fontFamily: {
         heading: ['Space Grotesk', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        body: ['JetBrains Mono', 'monospace'],
         mono: ['JetBrains Mono', 'monospace'],
+      },
+      boxShadow: {
+        'brutal': '6px 6px 0px 0px #111827',
+        'brutal-gold': '6px 6px 0px 0px #F59E0B',
       },
       borderRadius: {
         card: '16px',

@@ -1,11 +1,9 @@
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
-import About from './sections/About';
+import Problem from './sections/Problem';
 import VisionMission from './sections/VisionMission';
 import Programs from './sections/Programs';
-import Events from './sections/Events';
-import Partners from './sections/Partners';
-import Join from './sections/Join';
+import LegalPartners from './sections/LegalPartners';
 import Footer from './components/Footer';
 
 function App() {
@@ -13,12 +11,10 @@ function App() {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
-      <About />
+      <Problem />
       <VisionMission />
       <Programs />
-      <Events />
-      <Partners />
-      <Join />
+      <LegalPartners />
       <Footer />
     </div>
   );

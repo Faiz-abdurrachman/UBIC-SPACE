@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply bg-background text-text-primary font-body antialiased;
+    @apply bg-background text-tech-black font-body antialiased;
     margin: 0;
     min-height: 100vh;
     overflow-x: hidden;
@@ -32,34 +32,147 @@
     @apply relative;
   }
 
-  /* Subtle gradient backgrounds */
-  .gradient-orb {
+  /* Neo-Brutalist Grid Background Pattern - Visible Lines */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(to right, #D1D5DB 2px, transparent 2px),
+      linear-gradient(to bottom, #D1D5DB 2px, transparent 2px);
+    background-size: 50px 50px;
+  }
+
+  /* Bold Grid Pattern with Colors */
+  .bold-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 106, 78, 0.1) 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 106, 78, 0.1) 2px, transparent 2px);
+    background-size: 60px 60px;
+  }
+
+  /* Diagonal Lines Pattern */
+  .diagonal-lines {
+    background-image: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        rgba(0, 106, 78, 0.05) 20px,
+        rgba(0, 106, 78, 0.05) 22px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 20px,
+        rgba(245, 158, 11, 0.05) 20px,
+        rgba(245, 158, 11, 0.05) 22px
+      );
+  }
+
+  /* Technical Blueprint Pattern */
+  .blueprint-pattern {
+    background-image: 
+      linear-gradient(to right, #E5E5E5 1px, transparent 1px),
+      linear-gradient(to bottom, #E5E5E5 1px, transparent 1px),
+      linear-gradient(to right, rgba(0, 106, 78, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 106, 78, 0.1) 1px, transparent 1px);
+    background-size: 
+      20px 20px,
+      20px 20px,
+      100px 100px,
+      100px 100px;
+  }
+
+  /* Animated Grid Pattern */
+  .animated-grid {
+    background-image: 
+      linear-gradient(to right, rgba(0, 106, 78, 0.1) 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 106, 78, 0.1) 2px, transparent 2px),
+      linear-gradient(to right, rgba(245, 158, 11, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(245, 158, 11, 0.05) 1px, transparent 1px);
+    background-size: 
+      60px 60px,
+      60px 60px,
+      15px 15px,
+      15px 15px;
+    position: relative;
+  }
+
+  /* Neo-Brutalist Card Base */
+  .neo-card {
+    @apply border-2 border-tech-black bg-background rounded-lg;
+    box-shadow: 6px 6px 0px 0px #111827;
+  }
+
+  /* Hard Shadow on Hover */
+  .neo-card-hover {
+    transition: all 0.2s ease;
+  }
+
+  .neo-card-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 8px 8px 0px 0px #111827;
+  }
+
+  /* Section Background Variants */
+  .bg-section-alt {
+    background: linear-gradient(180deg, #FAFAFA 0%, #F5F5F5 100%);
+    background-image: 
+      linear-gradient(to right, rgba(0, 106, 78, 0.06) 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 106, 78, 0.06) 2px, transparent 2px);
+    background-size: 50px 50px;
+  }
+
+  .bg-section-pattern {
+    background-color: #FAFAFA;
+    background-image: 
+      linear-gradient(to right, rgba(0, 106, 78, 0.08) 2px, transparent 2px),
+      linear-gradient(to bottom, rgba(0, 106, 78, 0.08) 2px, transparent 2px),
+      linear-gradient(45deg, transparent 48%, rgba(245, 158, 11, 0.03) 49%, rgba(245, 158, 11, 0.03) 51%, transparent 52%);
+    background-size: 
+      60px 60px,
+      60px 60px,
+      30px 30px;
+  }
+
+  /* Stripe Pattern */
+  .stripe-pattern {
+    background: repeating-linear-gradient(
+      90deg,
+      #FAFAFA,
+      #FAFAFA 40px,
+      rgba(0, 106, 78, 0.03) 40px,
+      rgba(0, 106, 78, 0.03) 41px
+    );
+  }
+
+  /* Abstract Shapes */
+  .abstract-shapes {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .abstract-shapes::before {
+    content: '';
     position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 106, 78, 0.08) 0%, transparent 70%);
+    top: -300px;
+    right: -300px;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.15;
     pointer-events: none;
     z-index: 0;
   }
 
-  .gradient-orb-blue {
-    background: radial-gradient(circle, #3B82F6 0%, transparent 70%);
-  }
-
-  /* Grid background pattern */
-  .grid-pattern {
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 4rem 4rem;
-  }
-
-  /* Glow effect for cards */
-  .glow-on-hover {
-    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  .glow-on-hover:hover {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+  .abstract-shapes::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);
+    bottom: -200px;
+    left: -200px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
   }
 }
