@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const SHADOW_COLORS = {
   gold: '#F59E0B',
   'tech-black': '#111827',
-} as const;
+};
 
 export default function NeoCard({ 
   children, 

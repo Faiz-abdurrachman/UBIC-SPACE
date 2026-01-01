@@ -9,7 +9,7 @@ const BUTTON_VARIANTS = {
   primary: 'bg-primary-green text-white border-tech-black',
   secondary: 'bg-background text-tech-black border-tech-black',
   outline: 'bg-transparent text-tech-black border-tech-black hover:bg-tech-black hover:text-white',
-} as const;
+};
 
 export default function TechButton({ 
   children, 
